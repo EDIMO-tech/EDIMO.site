@@ -1,0 +1,108 @@
+/* --- Reset minimal --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- Body --- */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #f9f9f9, #e0f7fa);
+    color: #333;
+}
+
+/* --- Conteneur central --- */
+.container {
+    background: #ffffffdd; /* blanc semi-transparent */
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* --- Titres --- */
+h2 {
+    margin-bottom: 20px;
+    color: #00796b;
+}
+
+/* --- Input texte --- */
+input[type="text"] {
+    width: 100%;
+    padding: 12px 10px;
+    margin-bottom: 20px;
+    border: 2px solid #00796b;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+/* --- Bouton --- */
+button {
+    padding: 12px 20px;
+    background-color: #00796b;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #004d40;
+}
+
+/* --- Résultat binôme --- */
+.result {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #e0f2f1;
+    border-radius: 8px;
+    font-weight: bold;
+    color: #00796b;
+}
+
+body {
+    position: relative; /* nécessaire pour le pseudo-élément */
+    overflow: hidden;   /* évite les scrollbars si le texte est grand */
+}
+
+body::before {
+    content: "IAI";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 150px;           
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.05); 
+    z-index: 0;
+    pointer-events: none;       
+}
+
+.container {
+    position: relative;
+    z-index: 1; /* pour que ton formulaire et résultat soient au-dessus */
+}
+
+body::after {
+    content: "📚   ✏️      🎓      📝      📖      🏫      🧑‍🎓      📐      🧮      🖊️";
+    position: fixed;
+    inset: 0;
+    font-size: 48px;
+    opacity: 0.08;
+    line-height: 3.5;
+    letter-spacing: 80px;
+    white-space: normal;
+    pointer-events: none;
+    z-index: -1;
+}
+
+
