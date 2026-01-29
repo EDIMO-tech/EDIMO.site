@@ -28,3 +28,4 @@ echo "</ul>";
 // Fermeture de la connexion
 pg_close($conn);
 ?>
+
