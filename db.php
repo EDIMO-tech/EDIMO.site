@@ -1,9 +1,9 @@
 <?php
-$host = "sql303.infinityfree.com";
-$port = "3306";
-$dbname = "mabase";  // vérifie le nom exact de ta base
-$user = "ifo_41001189";
-$pass = "6vNqnX4RIZ";          // remplace par ton mot de passe MySQL
+$host = "dpg-d5tbtk8gjchc73f6f6qg-a.oregon.postgres.render.com";       // ex: dpg-xxxxx.render.com
+$port = "5432";
+$dbname = "mabase2";
+$user = "mabase2";
+$pass = "0ydrmZFWceLNvoDZxSrZyI61Y23OlAea";
 
 $conn = new mysqli($host, $user, $pass, $dbname, $port);
 
@@ -12,8 +12,3 @@ if ($conn->connect_error) {
 }
 // Connexion OK
 ?>
-
-
-
-
-
