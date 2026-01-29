@@ -1,27 +1,16 @@
-
 <?php
-include("db.php");
+require_once "db.php";
 
-// Récupérer le nom de l’utilisateur et normaliser la casse
-$nom = strtoupper(trim($_POST['nom']));
+$sql = "SELECT * FROM etudiants";
+$result = pg_query($conn, $sql);
 
-// Requête SQL pour trouver le binôme
-$sql = "SELECT 
-            e.nom AS etudiant,
-            COALESCE(
-                CASE 
-                    WHEN UPPER(b.etudiant_nom) = '$nom' THEN b.binome_nom
-                    WHEN UPPER(b.binome_nom) = '$nom' THEN b.etudiant_nom
-                END,
-                'Pas de binôme'
-            ) AS binome
-        FROM etudiants e
-        LEFT JOIN binome b
-            ON UPPER(e.nom) = UPPER(b.etudiant_nom) OR UPPER(e.nom) = UPPER(b.binome_nom)
-        WHERE UPPER(e.nom) = '$nom'
-        LIMIT 1";
+if (!$result) {
+    die("Erreur SQL : " . pg_last_error($conn));
+}
 
-$result = $conn->query($sql);
+while ($row = pg_fetch_assoc($result)) {
+    echo $row['nom'] . "<br>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -43,3 +32,4 @@ $result = $conn->query($sql);
     ?>
 </body>
 </html>
+
