@@ -1,35 +1,28 @@
 <?php
 require_once "db.php";
 
-$sql = "SELECT * FROM etudiants";
-$result = pg_query($conn, $sql);
+// 1️⃣ Récupération du paramètre depuis l'URL
+if (!isset($_GET['nom'])) {
+    die("Étudiant introuvable 😢");
+}
+
+$nom = $_GET['nom'];
+
+// 2️⃣ Requête ciblée (UN SEUL étudiant)
+$sql = "SELECT nom_binome FROM etudiants WHERE nom = $1";
+$result = pg_query_params($conn, $sql, [$nom]);
 
 if (!$result) {
-    die("Erreur SQL : " . pg_last_error($conn));
+    die("Erreur SQL");
 }
 
-while ($row = pg_fetch_assoc($result)) {
-    echo $row['nom'] . "<br>";
+// 3️⃣ Vérification du résultat
+if (pg_num_rows($result) === 0) {
+    echo "Binôme introuvable 😢";
+    exit;
 }
-?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Résultat binôme</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h2>Résultat du binôme 🤝</h2>
 
-    <?php
-    if($result && $result->num_rows > 0){
-        $row = $result->fetch_assoc();
-        echo "<p>Ton binôme est : <strong>{$row['binome']}</strong></p>";
-    } else {
-        echo "<p>Étudiant introuvable 😕</p>";
-    }
-    ?>
-</body>
-</html>
-
+// 4️⃣ Affichage du binôme
+$data = pg_fetch_assoc($result);
+echo "<h2>Résultat du binôme 🤝</h2>";
+echo "<strong>" . htmlspecialchars($data['nom_binome']) . "</strong>";
