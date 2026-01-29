@@ -1,5 +1,5 @@
 <?php
-$host = "dpg-d5tbtk8gjchc73f6f6qg-a.oregon.postgres.render.com";
+$host = "dpg-d5tbtk8gjchc73f6f6qg-a";
 $port = "5432";
 $dbname = "mabase2";
 $user = "mabase2";
@@ -12,3 +12,4 @@ $conn = pg_connect(
 if (!$conn) {
     die("Erreur de connexion PostgreSQL");
 }
+
